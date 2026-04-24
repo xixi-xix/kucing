@@ -25,7 +25,7 @@ def predict():
     pred = model.predict(input_data)
     hasil = le.inverse_transform(pred)
 
-    return jsonify({'penyakit': hasil[0]})
+    return jsonify({'penyakit': str(hasil[0])})
 
 import os
 if __name__=='__main__':
