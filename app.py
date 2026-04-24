@@ -1,11 +1,11 @@
-from sklearn.ensemble import RandomForestClassifier
+from flask import Flask, request, jsonify
 import joblib
 import os
 
 app = Flask(__name__)
 
 # =========================
-# LOAD MODEL (WAJIB DI ATAS)
+# LOAD MODEL
 # =========================
 model = joblib.load('model_kucing.pkl')
 le = joblib.load('label_encoder.pkl')
@@ -47,7 +47,7 @@ def predict():
     })
 
 # =========================
-# RUN (LOCAL + RAILWAY)
+# RUN APP
 # =========================
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
