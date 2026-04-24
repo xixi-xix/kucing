@@ -1,11 +1,26 @@
 from flask import Flask, request, jsonify
 import joblib
+import os
 
 app = Flask(__name__)
 
+# load model
 model = joblib.load('model_kucing.pkl')
 le = joblib.load('label_encoder.pkl')
 
+# =========================
+# HOME ROUTE (biar tidak 404)
+# =========================
+@app.route('/')
+def home():
+    return jsonify({
+        "status": "aktif",
+        "message": "API Kucing berjalan 🚀"
+    })
+
+# =========================
+# PREDICT ROUTE
+# =========================
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.json
@@ -25,9 +40,13 @@ def predict():
     pred = model.predict(input_data)
     hasil = le.inverse_transform(pred)
 
-    return jsonify({'penyakit': str(hasil[0])})
+    return jsonify({
+        'penyakit': str(hasil[0])
+    })
 
-import os
-if __name__=='__main__':
+# =========================
+# RUN APP (RAILWAY + LOCAL)
+# =========================
+if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
