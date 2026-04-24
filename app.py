@@ -4,12 +4,14 @@ import os
 
 app = Flask(__name__)
 
-# load model
+# =========================
+# LOAD MODEL (WAJIB DI ATAS)
+# =========================
 model = joblib.load('model_kucing.pkl')
 le = joblib.load('label_encoder.pkl')
 
 # =========================
-# HOME ROUTE (biar tidak 404)
+# HOME ROUTE
 # =========================
 @app.route('/')
 def home():
@@ -45,7 +47,7 @@ def predict():
     })
 
 # =========================
-# RUN APP (RAILWAY + LOCAL)
+# RUN (LOCAL + RAILWAY)
 # =========================
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
