@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from sklearn.ensemble import RandomForestClassifier
 import joblib
 import os
 
