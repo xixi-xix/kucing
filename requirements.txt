@@ -1,7 +1,6 @@
-fastapi
-uvicorn
+flask
+gunicorn
 lightgbm
+numpy
 scikit-learn
-pandas
 joblib
-openpyxl
